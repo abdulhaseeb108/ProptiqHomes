@@ -1,4 +1,4 @@
-// ✅ Profile.jsx — FINAL VERSION (Fully Fixed)
+// Profile.jsx — FINAL VERSION (Fully Fixed)
 import { useSelector } from 'react-redux';
 import { useRef, useState, useEffect } from 'react';
 import {
