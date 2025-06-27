@@ -1,7 +1,7 @@
-import { User } from '../models/user.model.js'; // ✅ named import
+import { User } from '../models/user.model.js'; // named import
 import Listing from '../models/listing.model.js';
 
-// ✅ Get current user info
+// Get current user info
 export const getUser = async (req, res) => {
   try {
     const user = await User.findById(req.params.id).select('-password');
@@ -12,7 +12,7 @@ export const getUser = async (req, res) => {
   }
 };
 
-// ✅ Create user (not really used in most cases because signup is handled in auth)
+// Create user (not really used in most cases because signup is handled in auth)
 export const createUser = async (req, res) => {
   try {
     const newUser = new User(req.body);
@@ -23,7 +23,7 @@ export const createUser = async (req, res) => {
   }
 };
 
-// ✅ Update user
+//  Update user
 export const updateUser = async (req, res) => {
   try {
     const updatedUser = await User.findByIdAndUpdate(
@@ -40,7 +40,7 @@ export const updateUser = async (req, res) => {
   }
 };
 
-// ✅ Delete user
+//  Delete user
 export const deleteUser = async (req, res) => {
   try {
     await User.findByIdAndDelete(req.params.id);
@@ -50,7 +50,7 @@ export const deleteUser = async (req, res) => {
   }
 };
 
-// ✅ Get listings created by this user
+//  Get listings created by this user
 // controllers/user.controller.js
 import Listing from '../models/listing.model.js';
 
