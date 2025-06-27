@@ -32,7 +32,7 @@ const SignIn = () => {
     dispatch(signInStart());
 
     try {
-      console.log('🔐 Sending login request with:', formData);
+      console.log('Sending login request with:', formData);
 
       const res = await axios.post(
         `${import.meta.env.VITE_API_BASE_URL}/auth/signin`,
@@ -40,11 +40,11 @@ const SignIn = () => {
         { withCredentials: true }
       );
 
-      console.log('✅ Login response:', res.data);
+      console.log('Login response:', res.data);
       dispatch(signInSuccess(res.data));
       navigate('/');
     } catch (error) {
-      console.error('❌ Login error:', error.response?.data || error.message);
+      console.error(' Login error:', error.response?.data || error.message);
       const errorMessage = error.response?.data?.message || 'Signin failed';
       setError(errorMessage);
       dispatch(signInFailure(error.response?.data));
