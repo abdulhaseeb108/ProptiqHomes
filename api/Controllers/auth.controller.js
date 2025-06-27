@@ -3,7 +3,6 @@ import bcryptjs from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { errorHandler } from '../utils/error.js';
 
-// 📝 Signup
 export const signup = async (req, res, next) => {
   try {
     const { username, email, password } = req.body;
@@ -56,7 +55,7 @@ export const signin = async (req, res) => {
   }
 };
 
-// 🔐 Google Auth
+//  Google Auth
 export const google = async (req, res, next) => {
   try {
     const user = await User.findOne({ email: req.body.email });
@@ -121,7 +120,7 @@ export const logout = (req, res) => {
 };
 
 
-// ✏️ Update User
+// ✏ Update User
 export const updateUser = async (req, res, next) => {
   if (req.user.id !== req.params.id) {
     return next(errorHandler(401, 'You can only update your own account!'));
@@ -145,7 +144,7 @@ export const updateUser = async (req, res, next) => {
   }
 };
 
-// ❌ Delete User
+//  Delete User
 export const deleteUser = async (req, res, next) => {
   if (req.user.id !== req.params.id) {
     return next(errorHandler(401, 'You can only delete your own account!'));
