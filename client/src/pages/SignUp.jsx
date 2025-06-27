@@ -38,10 +38,10 @@ const SignUp = () => {
         { withCredentials: true }
       );
 
-      console.log('✅ Signup successful:', res.data);
+      console.log(' Signup successful:', res.data);
       navigate('/sign-in');
     } catch (error) {
-      console.error('❌ Signup error:', error.response?.data || error.message);
+      console.error(' Signup error:', error.response?.data || error.message);
       setError(
         error.response?.data?.message || 'Signup failed. Try again later.'
       );
