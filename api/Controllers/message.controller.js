@@ -1,9 +1,9 @@
 import Message from '../models/message.model.js'; // assuming you have this model
 
-// ✅ Controller to send a message
+// Controller to send a message
 export const createMessage = async (req, res, next) => {
   try {
-    console.log('✅ Incoming request body:', req.body);
+    console.log(' Incoming request body:', req.body);
 
     const { receiver, listingId, message } = req.body;
 
@@ -29,15 +29,15 @@ export const createMessage = async (req, res, next) => {
       data: newMsg,
     });
 
-    console.log('✅ sender:', req.user.id);
-    console.log('✅ full body:', req.body);
+    console.log('sender:', req.user.id);
+    console.log('full body:', req.body);
   } catch (err) {
-    console.error('❌ Error in createMessage:', err.message);
+    console.error(' Error in createMessage:', err.message);
     next(err);
   }
 };
 
-// ✅ Controller to get my messages
+//  Controller to get my messages
 export const getMyMessages = async (req, res, next) => {
   try {
     const userId = req.user.id;
