@@ -5,7 +5,7 @@
 import Listing from "../models/listing.model.js";
 import { errorHandler } from "../utils/error.js";
 
-// ✅ Create Listing
+//  Create Listing
 export const createListing = async (req, res, next) => {
   try {
     const listing = await Listing.create(req.body);
@@ -16,7 +16,7 @@ export const createListing = async (req, res, next) => {
   }
 };
 
-// ✅ Get recent 6 listings (for Home page)
+//  Get recent 6 listings (for Home page)
 // export const getRecentListings = async (req, res) => {
 //   try {
 //     const listings = await Listing.find()
@@ -28,7 +28,7 @@ export const createListing = async (req, res, next) => {
 //   }
 // };
 
-// ✅ Get All Listings (admin maybe)
+//  Get All Listings (admin maybe)
 export const getAllListings = async (req, res) => {
   try {
     const listings = await Listing.find().sort({ createdAt: -1 });
@@ -38,7 +38,7 @@ export const getAllListings = async (req, res) => {
   }
 };
 
-// ✅ Get listing by ID
+//  Get listing by ID
 export const getListingById = async (req, res, next) => {
   try {
     const listing = await Listing.findById(req.params.id);
@@ -51,7 +51,7 @@ export const getListingById = async (req, res, next) => {
   }
 };
 
-// ✅ Get listings created by a user
+//  Get listings created by a user
 export const getUserListing = async (req, res, next) => {
   if (req.user.id === req.params.id) {
     try {
@@ -65,7 +65,7 @@ export const getUserListing = async (req, res, next) => {
   }
 };
 
-// ✅ Update listing
+//  Update listing
 export const updateListing = async (req, res, next) => {
   try {
     const listing = await Listing.findById(req.params.id);
@@ -85,7 +85,7 @@ export const updateListing = async (req, res, next) => {
   }
 };
 
-// ✅ Get recent 6 listings for home page
+//  Get recent 6 listings for home page
 export const getRecentListings = async (req, res) => {
   try {
     const listings = await Listing.find().sort({ createdAt: -1 }).limit(6);
@@ -96,7 +96,7 @@ export const getRecentListings = async (req, res) => {
 };
 
 
-// ✅ Delete listing
+//  Delete listing
 export const deleteListing = async (req, res, next) => {
   try {
     const listing = await Listing.findById(req.params.id);
@@ -113,7 +113,7 @@ export const deleteListing = async (req, res, next) => {
   }
 };
 
-// ✅ Search / Filter
+//  Search / Filter
 export const getListingsWithFilters = async (req, res) => {
   try {
     const {
