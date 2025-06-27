@@ -4,7 +4,6 @@ import { verifyToken } from '../utils/verifyUser.js';
 
 const router = express.Router();
 
-// ✅ GET listings with filters (e.g., ?offer=true&limit=4)
 router.get('/get', async (req, res) => {
   try {
     const { offer, limit } = req.query;
@@ -15,7 +14,7 @@ router.get('/get', async (req, res) => {
     }
 
     const listings = await Listing.find(query)
-      .sort({ createdAt: -1 }) // Newest first
+      .sort({ createdAt: -1 }) 
       .limit(parseInt(limit) || 10); // Default limit = 10
 
     res.status(200).json(listings);
@@ -25,7 +24,6 @@ router.get('/get', async (req, res) => {
   }
 });
 
-// ✅ GET a single listing by ID
 router.get('/:id', async (req, res) => {
   try {
     const listing = await Listing.findById(req.params.id);
@@ -39,7 +37,6 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-// ✅ POST a new listing (requires auth)
 router.post('/create', verifyToken, async (req, res) => {
   try {
     const newListing = new Listing({
@@ -55,7 +52,6 @@ router.post('/create', verifyToken, async (req, res) => {
   }
 });
 
-// ✅ DELETE a listing by ID (requires auth)
 router.delete('/delete/:id', verifyToken, async (req, res) => {
   try {
     const listing = await Listing.findById(req.params.id);
