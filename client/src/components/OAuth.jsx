@@ -3,7 +3,7 @@ import { app } from "../firebase";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { signInSuccess } from "../redux/user/userSlice";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 const OAuth = () => {
   const navigate = useNavigate();
@@ -12,11 +12,13 @@ const OAuth = () => {
   const handleGoogleClick = async () => {
     try {
       const provider = new GoogleAuthProvider();
-      const auth = getAuth(app);
-      const { user } = await signInWithPopup(auth, provider);
+      const auth = getAuth(app); // ✅ Make sure 'app' is the default Firebase app
+
+      const result = await signInWithPopup(auth, provider);
+      const { user } = result;
 
       const { data } = await axios.post(
-        "http://localhost:3000/api/auth/google",
+        "http://localhost:5000/api/auth/google",
         {
           name: user.displayName,
           email: user.email,
@@ -28,7 +30,15 @@ const OAuth = () => {
       dispatch(signInSuccess(data));
       navigate("/");
     } catch (err) {
-      console.error("Could not sign in with Google:", err);
+      if (err.code === "auth/popup-closed-by-user") {
+        console.warn("🟡 Google popup closed before completion.");
+      } else if (err.code === "auth/cancelled-popup-request") {
+        console.warn("🔁 Another Google popup request was cancelled.");
+      } else if (err.code === "auth/argument-error") {
+        console.error("❌ Firebase app was not initialized correctly.");
+      } else {
+        console.error("❌ Could not sign in with Google:", err);
+      }
     }
   };
 

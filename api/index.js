@@ -4,10 +4,12 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import connectMongoDB from './db.js';
+import path from 'path';
 
 // Load environment variables
 dotenv.config();
 
+const __dirname= path.resolve();
 // Initialize Express app
 const app = express();
 
@@ -30,10 +32,15 @@ import authRouter from './routes/auth.routes.js';
 import userRouter from './routes/user.routes.js';
 import listingRouter from './routes/listing.routes.js';
 
+
 app.use('/api/auth', authRouter);
 app.use('/api/user', userRouter);
 app.use('/api/listing', listingRouter);
 
+app.use(express.static(path.join(__dirname, '/client/dist')));
+app.get('*', (req, res) =>{
+  res.sendFile(path.join(__dirname, 'client' , 'dist', 'index.html'))
+})
 // Optional route: message
 try {
   const messageRouter = (await import('./routes/message.routes.js')).default;
