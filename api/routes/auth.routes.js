@@ -6,7 +6,7 @@ import {
   logout,
   updateUser,
   deleteUser,
-} from './controllers/auth.controller.js';
+} from '../controllers/auth.controller.js';
 import { verifyToken } from '../utils/verifyUser.js';
 
 const authRouter = express.Router();
